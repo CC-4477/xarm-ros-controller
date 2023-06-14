@@ -3,7 +3,7 @@
 
   <!--node name="xarm_service" pkg="xarm_ros" type=""-->
 
-  <node name="xarm_target_pose_publisher" pkg="controller" type="publishercontroller.py" output="screen"/>
+  <!--node name="xarm_target_pose_publisher" pkg="controller" type="publishercontroller.py" output="screen"/-->
 
   <node name="xarm_simple_planner_client" pkg="controller" type="controller.py" output="screen"/>
 </launch>
