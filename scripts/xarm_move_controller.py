@@ -2,7 +2,7 @@
 import rospy
 from std_msgs.msg import Bool
 from xarm_planner.srv import pose_plan, pose_plan, exec_plan
-from xarm_msgs.srv import SetInt16
+from xarm_msgs.srv import SetInt16, Move
 from geometry_msgs.msg import Pose, Point, Quaternion
 import time
 
@@ -27,6 +27,7 @@ def create_motion_plan(target_pose):
             rospy.logwarn("Failed to create motion plan.")
     except rospy.ServiceException as e:
         rospy.logerr("Service call failed: %s", str(e))
+
 
 def pose_callback(pose_msg):
     # Process the received pose message and create a motion plan
@@ -56,7 +57,6 @@ if __name__ == "__main__":
     srv_stop = SetInt16()
 
     rospy.Subscriber("xarm_target_pose", Pose, pose_callback)
-
     rospy.wait_for_service("xarm_pose_plan")
     rospy.wait_for_service("xarm_exec_plan")
     rospy.wait_for_service("ufactory/set_state")
