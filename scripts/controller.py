@@ -16,6 +16,7 @@ def request_exec(client, srv):
 
 def create_motion_plan(target_pose):
     rospy.wait_for_service("xarm_pose_plan")
+    print("Create Plan")
     try:
         pose_plan_service = rospy.ServiceProxy("xarm_pose_plan", pose_plan)
         response = pose_plan_service(target_pose)
@@ -49,7 +50,7 @@ if __name__ == "__main__":
     rospy.init_node("xarm_simple_planner_client")
     client = rospy.ServiceProxy("xarm_pose_plan", pose_plan)
     client_exec = rospy.ServiceProxy("xarm_exec_plan", exec_plan)
-    client_stop = rospy.ServiceProxy("xarm/set_state", SetInt16)
+    client_stop = rospy.ServiceProxy("ufactory/set_state", SetInt16)
     exec_pub = rospy.Publisher("xarm_planner_exec", Bool, queue_size=10)
     srv = pose_plan()
     srv_stop = SetInt16()
@@ -62,4 +63,4 @@ if __name__ == "__main__":
 
     rospy.spin()
 
-    rospy.signal_shutdown("Program terminated")
+    #rospy.signal_shutdown("Program terminated")
