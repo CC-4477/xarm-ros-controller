@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+
+
 import rospy
 from xarm_msgs.srv import Move, MoveRequest
 
