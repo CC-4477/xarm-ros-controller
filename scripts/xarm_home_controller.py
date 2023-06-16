@@ -2,7 +2,7 @@
 
 
 import rospy
-from xarm_msgs.srv import Move, MoveRequest
+from xarm_msgs.srv import Move, MoveRequest, SetInt16, SetInt16Request
 
 def move_callback(home_msg):
     tar_home = MoveRequest()
@@ -11,11 +11,17 @@ def move_callback(home_msg):
     tar_home.mvacc = home_msg.mvacc
     tar_home.mvtime = home_msg.mvtime
     tar_home.mvradii = home_msg.mvradii
+def state_callback(state_val):
+    state_value = SetInt16Request()
+    state_value = state_val
     
 if __name__ == '__main__':
     rospy.init_node('go_home_node')
+    set_state_service = rospy.ServiceProxy('ufactory/set_state', SetInt16)
     go_home_service = rospy.ServiceProxy('/ufactory/go_home', Move)
+    rospy.Subscriber("set_state", SetInt16Request, state_callback)
     rospy.Subscriber("go_home", MoveRequest, move_callback)
     rospy.wait_for_service('/ufactory/go_home')
+    rospy.wait_for_service('/ufactory/set_state')
 
     rospy.spin()
