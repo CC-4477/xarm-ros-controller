@@ -23,7 +23,7 @@ if __name__ == '__main__':
     srv_go = SetInt16()
     srv_go.data = 0
     set_state_service = rospy.ServiceProxy('ufactory/set_state', SetInt16)
-    go_home_service = rospy.ServiceProxy('/ufactory/go_home', Bool)
+    go_home_service = rospy.ServiceProxy('/ufactory/go_home', Move)
 
 
     rospy.Subscriber("set_state", Int16, state_callback)
