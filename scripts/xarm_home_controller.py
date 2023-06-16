@@ -1,5 +1,5 @@
 import rospy
-from xarm_msgs.msg import Move
+from xarm_msgs.srv import Move, MoveRequest
 
 def move_callback(home_msg):
     tar_home = Move()
