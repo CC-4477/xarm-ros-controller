@@ -14,8 +14,8 @@ def move_callback(home_msg):
     
 if __name__ == '__main__':
     rospy.init_node('go_home_node')
-    rospy.wait_for_service('/ufactory/go_home')
-    go_home_service = rospy.ServiceProxy('/ufactory/go_home', MoveRequest)
+    go_home_service = rospy.ServiceProxy('/ufactory/go_home', Move)
     rospy.Subscriber("go_home", MoveRequest, move_callback)
+    rospy.wait_for_service('/ufactory/go_home')
 
     rospy.spin()
