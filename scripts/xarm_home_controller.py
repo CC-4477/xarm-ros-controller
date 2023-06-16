@@ -17,6 +17,7 @@ def state_callback(state_val):
     state_value = SetInt16()
     state_value = state_val.data
     set_state_service(state_value)
+    rospy.sleep(1)
     
 if __name__ == '__main__':
     rospy.init_node('go_home_node')
