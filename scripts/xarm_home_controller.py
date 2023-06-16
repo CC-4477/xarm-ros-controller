@@ -12,6 +12,7 @@ def move_callback(home_msg):
     tar_home.mvacc = home_msg.mvacc
     tar_home.mvtime = home_msg.mvtime
     tar_home.mvradii = home_msg.mvradii
+    go_home_service(tar_home)
 def state_callback(state_val):
     state_value = SetInt16()
     state_value = state_val.data
@@ -22,7 +23,7 @@ if __name__ == '__main__':
     srv_go = SetInt16()
     srv_go.data = 0
     set_state_service = rospy.ServiceProxy('ufactory/set_state', SetInt16)
-    go_home_service = rospy.ServiceProxy('/ufactory/go_home', MoveRequest)
+    go_home_service = rospy.ServiceProxy('/ufactory/go_home', Move)
 
 
     rospy.Subscriber("set_state", Int16, state_callback)
