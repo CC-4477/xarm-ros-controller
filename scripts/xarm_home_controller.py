@@ -5,7 +5,7 @@ import rospy
 from xarm_msgs.srv import Move, MoveRequest
 
 def move_callback(home_msg):
-    tar_home = Move()
+    tar_home = MoveRequest()
     tar_home.pose = home_msg.pose
     tar_home.mvvelo = home_msg.mvvelo
     tar_home.mvacc = home_msg.mvacc
@@ -15,7 +15,7 @@ def move_callback(home_msg):
 if __name__ == '__main__':
     rospy.init_node('go_home_node')
     rospy.wait_for_service('/ufactory/go_home')
-    go_home_service = rospy.ServiceProxy('/ufactory/go_home', Move)
-    rospy.Subscriber("go_home", Move, move_callback)
+    go_home_service = rospy.ServiceProxy('/ufactory/go_home', MoveRequest)
+    rospy.Subscriber("go_home", MoveRequest, move_callback)
 
     rospy.spin()
