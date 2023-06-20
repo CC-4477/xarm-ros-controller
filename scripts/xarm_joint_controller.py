@@ -55,7 +55,7 @@ if __name__ == "__main__":
     srv = joint_plan()
     srv_stop = SetInt16()
 
-    rospy.Subscriber("xarm_target_joint", JointState.position, joint_callback)
+    rospy.Subscriber("xarm_pub_joint", Move, joint_callback)
     rospy.wait_for_service("xarm_joint_plan")
     rospy.wait_for_service("xarm_exec_plan")
     rospy.wait_for_service("ufactory/set_state")
