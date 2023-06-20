@@ -30,11 +30,10 @@ def create_motion_plan(tar_joint):
         rospy.logerr("Service call failed: %s", str(e))
 
 
-def joint_callback(joint_msg):
+def joint_callback(msg):
     # Process the received pose message and create a motion plan
-    tar_joint = Move()
-    tar_joint.pose = joint_msg.data
-    motion_plan = create_motion_plan(tar_joint)
+    
+    motion_plan = create_motion_plan(msg)
     
     if motion_plan is not None:
         rospy.loginfo("Motion plan created. Executing...")
