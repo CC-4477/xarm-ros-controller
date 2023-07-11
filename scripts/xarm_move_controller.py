@@ -4,6 +4,8 @@ from std_msgs.msg import Bool
 from xarm_planner.srv import pose_plan, pose_plan, exec_plan
 from xarm_msgs.srv import SetInt16, Move
 from geometry_msgs.msg import Pose, Point, Quaternion
+from moveit_msgs.msg import CollisionObject
+from shape_msgs.msg import SolidPrimitive
 import time
 
 def request_plan(client, srv):
@@ -15,6 +17,7 @@ def request_exec(client, srv):
     return response.success
 
 def create_motion_plan(target_pose):
+    
     rospy.wait_for_service("xarm_pose_plan")
     print("Create Plan")
     try:
